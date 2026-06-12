@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_cors import CORS
 
@@ -16,6 +18,9 @@ CORS(app)
 # Initialize Database
 db.init_app(app)
 
+with app.app_context():
+    db.create_all()
+
 # Register API Blueprint
 app.register_blueprint(call_metrics_bp)
 
@@ -28,4 +33,7 @@ def home():
 
 # Run Server
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    debug = os.environ.get("FLASK_DEBUG", "0") == "1"
+
+    app.run(host="0.0.0.0", port=port, debug=debug)
