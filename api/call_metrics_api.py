@@ -32,3 +32,16 @@ def create_call_metric():
     result = CallMetricsService.create_call_metric(payload)
 
     return jsonify(result), 201
+
+
+@call_metrics_bp.route(
+    "/api/call-metrics/<int:call_id>",
+    methods=["DELETE"]
+)
+def delete_call_metric(call_id):
+
+    result = CallMetricsService.delete_call_metric(call_id)
+
+    status_code = 200 if result.get("deleted") else 404
+
+    return jsonify(result), status_code

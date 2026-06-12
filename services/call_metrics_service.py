@@ -57,3 +57,17 @@ class CallMetricsService:
             "id": call.id,
             "message": "Call metric saved successfully",
         }
+
+    @staticmethod
+    def delete_call_metric(call_id):
+        deleted = CallMetricsRepository.delete_call_by_call_id(call_id)
+        if not deleted:
+            return {
+                "message": "Call metric not found",
+                "deleted": False,
+            }
+
+        return {
+            "message": "Call metric deleted successfully",
+            "deleted": True,
+        }

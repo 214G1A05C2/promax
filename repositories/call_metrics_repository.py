@@ -14,3 +14,13 @@ class CallMetricsRepository:
         db.session.add(call)
         db.session.commit()
         return call
+
+    @staticmethod
+    def delete_call_by_call_id(call_id):
+        call = CallMetrics.query.filter_by(call_id=call_id).first()
+        if not call:
+            return False
+
+        db.session.delete(call)
+        db.session.commit()
+        return True
