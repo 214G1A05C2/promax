@@ -1,21 +1,5 @@
-# Python bytecode and virtual envs
 __pycache__/
 *.py[cod]
 .venv/
-venv/
-env/
-
-# Local databases and runtime data
-instance/calls.db
-outputs/
-
-# Frontend dependencies and builds
-frontend/node_modules/
-frontend/build/
-frontend/.vercel/
-frontend/.env
-frontend/.env.*
-
-# Misc
-.DS_Store
+instance/
 *.log
