@@ -28,14 +28,15 @@ async def lifespan(app: FastAPI):
     
 app = FastAPI(title="Healthcare Intent Analytics", lifespan=lifespan)
 
+cors_origins = os.getenv("CORS_ORIGINS", "*")
+allowed_origins = [origin.strip() for origin in cors_origins.split(",") if origin.strip()]
+if allowed_origins == ["*"]:
+    allowed_origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ],
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
