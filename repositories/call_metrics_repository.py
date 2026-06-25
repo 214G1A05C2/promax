@@ -9,6 +9,10 @@ class CallMetricsRepository:
         return data
 
     @staticmethod
+    def get_call_by_call_id(call_id):
+        return CallMetrics.query.filter_by(call_id=call_id).first()
+
+    @staticmethod
     def create_call(payload):
         call = CallMetrics(**payload)
         db.session.add(call)
